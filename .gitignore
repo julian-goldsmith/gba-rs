@@ -2,3 +2,6 @@
 **/*.rs.bk
 obj
 rust
+libcore-arm
+*.swp
+*.gba
