@@ -5,3 +5,6 @@ rust
 libcore-arm
 *.swp
 *.gba
+tiles.png
+tiles.h
+tiles.s
