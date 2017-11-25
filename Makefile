@@ -4,7 +4,10 @@ LIB_GCC_PATH = ${shell arm-none-eabi-gcc -print-libgcc-file-name}
 all: cart.gba obj/cart.map
 
 clean:
-	rm -f obj/cart.elf obj/*.o obj/cart.map tiles.s cart.gba obj/lib/*.rlib obj/lib/*.a
+	rm -f obj/cart.elf obj/*.o obj/cart.map tiles.s cart.gba
+
+clean-lib:
+	rm -f obj/lib/*.rlib obj/lib/*.a
 
 cart.gba: obj/cart.elf
 	arm-none-eabi-objcopy -Obinary obj/cart.elf cart.gba
@@ -16,14 +19,14 @@ obj/cart.elf: obj/lib/libcore.rlib obj/gba_crt0.o obj/tiles.o obj/main.o
 obj/cart.map: obj/cart.elf
 	arm-none-eabi-objdump -t -d obj/cart.elf > obj/cart.map
 
-obj/gba_crt0.o:
+obj/gba_crt0.o: src/gba_crt0.s
 	arm-none-eabi-gcc --specs gba.specs -c -o obj/gba_crt0.o src/gba_crt0.s
 
-obj/tiles.o:
+obj/tiles.o: tiles.png
 	grit tiles.png -gB8 -mR8 -mLs -fts
 	arm-none-eabi-gcc --specs gba.specs -c -o obj/tiles.o tiles.s
 
-obj/main.o: obj/lib/libcore.rlib
+obj/main.o: obj/lib/libcore.rlib src/main.rs src/runtime.rs
 	rustc -O -Z no-landing-pads --target arm-none-eabi -g --emit obj -L obj/lib -o obj/main.o src/main.rs
 
 obj/lib/libcore.rlib: 
