@@ -2,18 +2,27 @@
 #![no_std]
 #![crate_type="staticlib"]
 
+pub mod rlibc;
 pub mod runtime;
 mod gba;
 
+use core::ptr;
+
+extern "C" {
+    static tilesTiles: *const u32;
+    static tilesMap: *const u32;
+    static tilesPal: *const u32;
+}
+
 #[no_mangle]
 pub unsafe extern "C" fn main() {
-    *gba::DISP_CNT = 0x0403;
+    ptr::copy(tilesPal, gba::BG_PAL_MEM, 128);
+    ptr::copy(tilesTiles, gba::TILE_MEM, 4680);
+    ptr::copy(tilesMap, gba::BG0_MEM, 300);
 
-    let arr = 0x06000000 as *mut [u16; 160 * 240];
+    *gba::DISP_CNT = gba::DCNT_MODE0 | gba::DCNT_BG0;
 
-    (*arr)[120 + 80*240] = 0x001F;
-    (*arr)[136 + 80*240] = 0x03E0;
-    (*arr)[120 + 96*240] = 0x7C00;
+    *gba::BG0_CNT = 0x1E80;//gba::BG_8BPP | gba::BG_REG_64X32;
 
     loop { }
 }
