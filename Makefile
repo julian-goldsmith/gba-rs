@@ -27,8 +27,8 @@ obj/tiles.o: tiles.png
 	grit tiles.png -gB8 -mR8 -mLs -fts
 	arm-none-eabi-gcc --specs gba.specs -c -o obj/tiles.o tiles.s
 
-obj/main.o: obj/lib/libcore.rlib ${RSFILES}
-	rustc -O -Z no-landing-pads --target arm-none-eabi -g --emit obj -L obj/lib -o obj/main.o src/main.rs
+target/arm-none-eabi/libgba.a: ${RSFILES}
+	xargo build
 
-obj/lib/libcore.rlib: 
-	rustc -O --crate-type=lib -Z no-landing-pads --target arm-none-eabi -g rust/src/libcore/lib.rs --out-dir obj/lib --crate-name core
+obj/main.o: obj/lib/libcore.rlib 
+	rustc -O -Z no-landing-pads --target arm-none-eabi -g --emit obj -L obj/lib -o obj/main.o src/main.rs
