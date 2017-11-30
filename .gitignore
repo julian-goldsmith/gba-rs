@@ -1,8 +1,7 @@
 /target/
 **/*.rs.bk
 obj
-rust
-libcore-arm
+gen
 *.swp
 *.gba
 *.sav
