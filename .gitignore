@@ -6,7 +6,6 @@ libcore-arm
 *.swp
 *.gba
 *.sav
-map.txt
-tiles.png
 tiles.h
 tiles.s
+*.png

@@ -1,5 +1,6 @@
 LIB_C_PATH = ${shell arm-none-eabi-gcc -print-file-name=libc.a}
 LIB_GCC_PATH = ${shell arm-none-eabi-gcc -print-libgcc-file-name}
+RSFILES = src/main.rs src/runtime.rs src/sprite.rs src/gba.rs
 
 all: cart.gba obj/cart.map
 
@@ -26,7 +27,7 @@ obj/tiles.o: tiles.png
 	grit tiles.png -gB8 -mR8 -mLs -fts
 	arm-none-eabi-gcc --specs gba.specs -c -o obj/tiles.o tiles.s
 
-obj/main.o: obj/lib/libcore.rlib src/main.rs src/runtime.rs
+obj/main.o: obj/lib/libcore.rlib ${RSFILES}
 	rustc -O -Z no-landing-pads --target arm-none-eabi -g --emit obj -L obj/lib -o obj/main.o src/main.rs
 
 obj/lib/libcore.rlib: 
