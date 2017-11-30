@@ -7,10 +7,7 @@ LIBGBA = target/arm-none-eabi/debug/libgba.rlib
 all: cart.gba obj/cart.map
 
 clean:
-	rm -f obj/cart.elf obj/*.o obj/cart.map tiles.s cart.gba
-
-clean-lib:
-	rm -f obj/lib/*.rlib obj/lib/*.a
+	rm -rf obj gen cart.gba target
 
 cart.gba: obj/cart.elf
 	arm-none-eabi-objcopy -Obinary obj/cart.elf cart.gba
@@ -31,7 +28,7 @@ obj/tiles.o: gen/tiles.c | obj
 gen/tiles.c: tiles.png | gen
 	grit tiles.png -gB8 -mR8 -mLs -ftch -o gen/tiles.c
 
-${LIBGBA}: ${RSFILES} gen/tiles.c
+${LIBGBA}: build.rs ${RSFILES} gen/tiles.c
 	xargo build
 
 gen:

@@ -4,6 +4,4 @@ version = "0.1.0"
 authors = ["Julian Goldsmith <julian@juliangoldsmith.com>"]
 
 [build-dependencies]
-cc = "1.0"
-bindgen = "0.26.3"
-gcc = "*"
+bindgen = "0.31"

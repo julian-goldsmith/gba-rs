@@ -8,6 +8,8 @@ fn main() {
 
     let bindings = bindgen::Builder::default()
         .header("gen/tiles.h")
+        .ctypes_prefix("::ctypes")
+        .use_core()
         .generate()
         .expect("Unable to generate bindings");
 
