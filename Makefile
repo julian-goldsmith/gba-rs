@@ -22,10 +22,10 @@ obj/cart.elf: obj/gba_crt0.o obj/tiles.o ${LIBGBA}
 	arm-none-eabi-ld -T gba_cart.ld --gc-sections -o obj/cart.elf obj/gba_crt0.o obj/tiles.o ${LIBGBA} ${LIBCORE_PATH} ${LIBM_PATH} ${LIBC_PATH} ${LIBGCC_PATH}
 
 obj/gba_crt0.o: src/gba_crt0.s | obj
-	arm-none-eabi-gcc --specs gba.specs -c -o obj/gba_crt0.o src/gba_crt0.s
+	arm-none-eabi-gcc -c -o obj/gba_crt0.o src/gba_crt0.s
 
 obj/tiles.o: gen/tiles.c | obj
-	arm-none-eabi-gcc --specs gba.specs -c -o obj/tiles.o gen/tiles.c
+	arm-none-eabi-gcc -c -o obj/tiles.o gen/tiles.c
 
 gen/tiles.c: tiles.png | gen
 	grit tiles.png -gB8 -mR8 -mLs -ftch -o gen/tiles.c
