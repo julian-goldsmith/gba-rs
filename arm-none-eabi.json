@@ -7,17 +7,11 @@
     "llvm-target": "arm-none-eabi",
     "morestack": false,
     "os": "none",
+    "env": "eabi",
     "relocation-model": "static",
     "target-endian": "little",
     "target-pointer-width": "32",
     "target-c-int-width": "32",
     "no-compiler-rt": true,
-    "linker-flavor": "ld",
-    "pre-link-args": [
-        "-mcpu=arm7tdmi", "-marm",
-        "-Tgba_cart.ld", "--specs gba.specs"
-    ],
-    "post-link-args": [
-        "-lm", "-lgcc", "-lnosys"
-    ]
+    "linker-flavor": "ld"
 }
