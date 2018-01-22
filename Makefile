@@ -9,7 +9,7 @@ LIBGBA = target/arm-none-eabi/debug/libgba.rlib
 all: cart.gba obj/cart.map
 
 clean:
-	rm -rf obj gen cart.gba target
+	rm -rf obj gen cart.gba cart.sav target
 
 cart.gba: obj/cart.elf
 	arm-none-eabi-objcopy -Obinary obj/cart.elf cart.gba

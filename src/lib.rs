@@ -30,6 +30,7 @@ pub unsafe extern "C" fn main() {
     *gba::DISP_CNT = gba::DCNT_MODE0 | gba::DCNT_BG0 | gba::DCNT_OBJ;
 
     let entry = sprite::OAMEntry::new(16, 16, 200);
+    entry.set_size(2);
 
     loop {
         wait_vsync();

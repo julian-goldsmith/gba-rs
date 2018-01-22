@@ -46,6 +46,10 @@ impl OAMEntry {
             };
     }
 
+    pub fn set_size(&mut self, size: u16) {
+        self.attr1 = (self.attr1 & 0b0011111111111111) | size << 14;
+    }
+
     pub fn set_tile_id(&mut self, id: u16) {
         self.attr2 = (self.attr2 & 0xfe00) | (id & 0x01ff);
     }

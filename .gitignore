@@ -8,3 +8,4 @@ gen
 tiles.h
 tiles.s
 *.png
+*.xcf
