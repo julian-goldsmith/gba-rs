@@ -1,4 +1,6 @@
-This was written by Julian Goldsmith around November 2017, and updated a few times in 2018.  It uses Xargo, which is deprecated; getting it to build may take some work due to that.
+This repository contains code to draw sprites and backgrounds on the GameBoy Advance.  It was written by Julian Goldsmith around November 2017, and updated a few times in 2018.
+
+It uses Xargo, which is deprecated; because of that, getting it to build may take some work.
 
 I am unable to distribute the tiles I was using, so those are not included.
 
