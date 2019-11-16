@@ -1,0 +1,5 @@
+This was written by Julian Goldsmith around November 2017, and updated a few times in 2018.  It uses Xargo, which is deprecated; getting it to build may take some work due to that.
+
+I am unable to distribute the tiles I was using, so those are not included.
+
+gba_crt0.s and gba_cart.ld are from devKitARM.

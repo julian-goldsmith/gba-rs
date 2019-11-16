@@ -21,11 +21,16 @@ fn set_bit_if(condition: bool, n: u32) -> u32 {
     }
 }
 
-pub fn build_bgcnt(size: u32, overflow: bool, sbb: u32, is_256_colors: bool, 
-                      is_mosaic: bool, cbb: u32, prio: u32) -> u32 {
-    (size << 14) | set_bit_if(overflow, 13) | (sbb << 8) |
+pub fn set_bgcnt(size: u32, overflow: bool, sbb: u32, is_256_colors: bool, 
+                 is_mosaic: bool, cbb: u32, prio: u32) {
+    *gba::BG0_CNT = (size << 14) | set_bit_if(overflow, 13) | (sbb << 8) |
         set_bit_if(is_256_colors, 7) | set_bit_if(is_mosaic, 6) |
-        (cbb << 2) | prio
+        (cbb << 2) | prio;
+}
+
+pub fn set_dispcnt() {
+    // FIXME
+    *gba::DISP_CNT = gba::DCNT_MODE0 | gba::DCNT_BG0 | gba::DCNT_OBJ;
 }
 
 pub const DCNT_MODE0: u32 = 0b00;

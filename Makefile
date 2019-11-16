@@ -31,7 +31,7 @@ gen/tiles.c: tiles.png | gen
 	grit tiles.png -gB8 -mR8 -mLs -ftch -o gen/tiles.c
 
 ${LIBGBA}: build.rs ${RSFILES} gen/tiles.c Cargo.toml
-	xargo build
+	cargo xbuild --target arm-none-eabi.json
 
 gen:
 	mkdir gen

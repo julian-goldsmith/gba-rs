@@ -26,8 +26,8 @@ pub unsafe extern "C" fn main() {
     ptr::copy(&tilesPal, gba::OBJ_PAL_MEM as _, 1);
     ptr::copy(&tilesMap, gba::BG0_MEM as _, 1);
 
-    *gba::BG0_CNT = gba::build_bgcnt(0, false, 30, true, false, 0, 0);
-    *gba::DISP_CNT = gba::DCNT_MODE0 | gba::DCNT_BG0 | gba::DCNT_OBJ;
+    gba::set_bgcnt(0, false, 30, true, false, 0, 0);
+    gba::set_dispcnt();
 
     let entry = sprite::OAMEntry::new(16, 16, 200);
     entry.set_size(2);
